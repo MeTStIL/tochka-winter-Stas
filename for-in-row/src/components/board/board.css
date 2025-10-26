@@ -1,0 +1,14 @@
+﻿.board {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    background-color: #a60fd8;
+    border-radius: 10px;
+    padding: 8px;
+    gap: 6px;
+}
+
+.board-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
