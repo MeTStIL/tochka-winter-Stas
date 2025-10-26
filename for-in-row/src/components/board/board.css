@@ -1,10 +1,12 @@
 ﻿.board {
     display: grid;
+    height: 50vh;
     grid-template-rows: repeat(6, 1fr);
     background-color: #a60fd8;
     border-radius: 10px;
     padding: 8px;
     gap: 6px;
+    align-items: center;
 }
 
 .board-row {

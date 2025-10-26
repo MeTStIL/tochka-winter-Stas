@@ -8,3 +8,6 @@ export interface WinnerInfo {
     player: Player;
     pos: [number, number][];
 }
+
+export type BoardType = CellStatus[][];
+

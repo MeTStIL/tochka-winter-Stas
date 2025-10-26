@@ -1,11 +1,12 @@
 import './App.css'
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AppRoute} from "./constants.ts";
+import {AppRoute, GameStatus} from "./constants.ts";
 import ReactVite from "./pages/ReactVite.tsx";
-import Board from "./components/board/board.tsx";
+import Game from "./pages/game.tsx";
 
 function App() {
+
     return (
         <>
             <HelmetProvider>
@@ -14,12 +15,12 @@ function App() {
 
                         <Route
                             path={AppRoute.Main}
-                            element={<ReactVite />}
+                            element={<ReactVite/>}
                         />
 
                         <Route
                             path={AppRoute.Game}
-                            element={<Board />}
+                            element={<Game status={GameStatus.InProgress} />}
                         />
 
                     </Routes>
