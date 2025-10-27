@@ -23,7 +23,9 @@ export const BoardSize = {
 
 export const GameStatus = {
     InProgress: 'inProgress',
-    End: 'End',
+    SomebodyWins: 'somebodyWins',
+    Draw: 'draw',
+
 } as const;
 
 export type GameStatusType = typeof GameStatus[keyof typeof GameStatus];

@@ -1,7 +1,7 @@
 import './App.css'
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AppRoute, GameStatus} from "./constants.ts";
+import {AppRoute} from "./constants.ts";
 import ReactVite from "./pages/ReactVite.tsx";
 import Game from "./pages/game.tsx";
 
@@ -20,7 +20,12 @@ function App() {
 
                         <Route
                             path={AppRoute.Game}
-                            element={<Game status={GameStatus.InProgress} />}
+                            element={<Game/>}
+                        />
+
+                        <Route
+                            path={AppRoute.Secret}
+                            element={<ReactVite/>}
                         />
 
                     </Routes>

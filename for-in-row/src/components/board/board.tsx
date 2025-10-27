@@ -2,15 +2,18 @@
 import './board.css'
 import Cell from "../cell/cell.tsx";
 import {useState} from "react";
+import {GameStatus, type GameStatusType} from "../../constants.ts";
 
 type BoardProps = {
     board: CellStatus[][];
     onColumnClick: (columnNumber: number) => void;
     currentPlayer: Player;
+    gameStatus: GameStatusType;
+    winningCells: number[][];
 }
 
 
-function Board({board, onColumnClick, currentPlayer}: BoardProps) {
+function Board({board, onColumnClick, currentPlayer, gameStatus, winningCells}: BoardProps) {
     const [hoveredCell, setHoveredCell] = useState<null | number>(null);
 
     const previewRow = hoveredCell !== null
@@ -22,16 +25,24 @@ function Board({board, onColumnClick, currentPlayer}: BoardProps) {
             <div className='board'>
                 {board.map((row, rowIdx) => (
                     <div key={rowIdx} className={'board-row'}>
-                        {row.map((cell, colIdx) => (
-                            <Cell key={colIdx}
-                                  value={cell}
-                                  showPreview={hoveredCell === colIdx && previewRow === rowIdx}
-                                  previewPlayer={currentPlayer}
-                                  onClick={() => onColumnClick(colIdx)}
-                                  onMouseEnter={() => setHoveredCell(colIdx)}
-                                  onMouseLeave={() => setHoveredCell(null)}
-                            />
-                        ))}
+                        {row.map((cell, colIdx) => {
+
+                            const isWinningCellFlag = winningCells.filter(([r, c]) => r === rowIdx && c === colIdx).length > 0;
+
+                            return (
+                                <Cell key={colIdx}
+                                      value={cell}
+                                      showPreview={gameStatus === GameStatus.InProgress && hoveredCell === colIdx && previewRow === rowIdx}
+                                      previewPlayer={currentPlayer}
+                                      onClick={() => onColumnClick(colIdx)}
+                                      onMouseEnter={() => setHoveredCell(colIdx)}
+                                      onMouseLeave={() => setHoveredCell(null)}
+                                      isWinningCell={isWinningCellFlag}
+                                />
+                            );
+
+
+                        })}
                     </div>
                 ))}
 

@@ -10,10 +10,11 @@ type CellProps = {
     onClick: () => void;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
+    isWinningCell?: boolean;
 };
 
 
-function Cell({value, showPreview = false, previewPlayer, onClick, onMouseEnter, onMouseLeave}: CellProps) {
+function Cell({value, showPreview = false, previewPlayer, onClick, onMouseEnter, onMouseLeave, isWinningCell}: CellProps) {
     const getColor = () => {
         switch (value) {
             case 'player_1':
@@ -40,6 +41,7 @@ function Cell({value, showPreview = false, previewPlayer, onClick, onMouseEnter,
         backgroundColor: value === null && showPreview && previewPlayer
             ? getPreviewColor()
             : getColor(),
+        boxShadow: isWinningCell ? '0 0 15px 5px orange' : 'none',
     };
 
     return (

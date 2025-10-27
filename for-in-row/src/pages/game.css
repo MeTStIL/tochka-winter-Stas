@@ -1,0 +1,27 @@
+﻿
+.game-header small {
+    display: block;
+    font-size: 30px;
+    font-weight: normal;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.game-header.draw {
+    color: #777;
+}
+
+.game-header.somebody-win.player_1 {
+    color: #ff4d4d;
+    text-shadow: 0 0 10px #ff4d4daa;
+}
+
+.game-header.somebody-win.player_2 {
+    color: #f5d742;
+    text-shadow: 0 0 10px #f5d742aa;
+}
+
+.restart-btn {
+    margin-top: 60px;
+}
+
