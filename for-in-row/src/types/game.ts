@@ -11,3 +11,8 @@ export interface WinnerInfo {
 
 export type BoardType = CellStatus[][];
 
+export type GameResult = {
+    id: number,
+    winner: Player | 'draw',
+}
+

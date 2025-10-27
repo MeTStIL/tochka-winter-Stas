@@ -8,7 +8,6 @@ export function getGameHeader(gameStatus: GameStatusType, currentPlayer: Player)
             return (
                 <span className='game-header draw'>
                     Ничья!
-                    <small>Перезапустите игру</small>
                 </span>
             );
         case GameStatus.InProgress:
@@ -27,9 +26,6 @@ export function getGameHeader(gameStatus: GameStatusType, currentPlayer: Player)
                     <strong>
                         {currentPlayer === 'player_1' ? ' Игрок 1 🔴' : ' Игрок 2🟡'}
                     </strong>
-
-                    <small>Перезапустите игру</small>
-
                 </span>
             );
     }

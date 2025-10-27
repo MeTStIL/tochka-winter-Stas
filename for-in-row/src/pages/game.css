@@ -25,3 +25,26 @@
     margin-top: 60px;
 }
 
+.restart-btn.highlight {
+    box-shadow: 0 0 20px 5px rgba(82, 184, 14, 0.6);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+
+
+.game-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+

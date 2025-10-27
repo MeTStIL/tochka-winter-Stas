@@ -1,0 +1,33 @@
+﻿.game-history-container {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    width: 250px;
+    background: #1e1e1e;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.15);
+}
+
+.game-history-container h3 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.game-history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.game-history-table th,
+.game-history-table td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px;
+    text-align: center;
+}
+
+.game-history-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
