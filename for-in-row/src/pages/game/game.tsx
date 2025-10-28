@@ -1,11 +1,12 @@
-﻿import type {BoardType, GameResult, Player} from "../types/game.ts";
-import {BoardSize, GameStatus, type GameStatusType} from "../constants.ts";
-import {useState} from "react";
-import Board from "../components/board/board.tsx";
-import {checkWin} from "../utils/check-win.ts";
-import {getGameHeader} from "../utils/get-game-header.tsx";
+﻿import type {BoardType, GameResult, Player} from "../../types/game.ts";
+import {AppRoute, BoardSize, GameStatus, type GameStatusType} from "../../constants.ts";
+import {useEffect, useState} from "react";
+import Board from "../../components/board/board.tsx";
+import {checkWin} from "../../utils/check-win.ts";
+import {getGameHeader} from "../../utils/get-game-header.tsx";
 import './game.css'
-import GameHistory from "../components/game-history/game-history.tsx";
+import GameHistory from "../../components/game-history/game-history.tsx";
+import TransitionButton from "../../components/transition-button/transition-button.tsx";
 
 
 function Game() {
@@ -19,6 +20,13 @@ function Game() {
     const [gameHistory, setGameHistory] = useState<GameResult[]>([])
     const [gameId, setGameId] = useState(1);
     const [highlightRestart, setHighlightRestart] = useState(false);
+
+    useEffect(() => {
+        if (gameStatus !== GameStatus.InProgress) {
+            handleEndGame();
+        }
+    }, [gameStatus]);
+
 
     const handleColumnClick = (column: number) => {
         if (winner) {
@@ -84,6 +92,7 @@ function Game() {
 
     return (
         <div className='game-layout'>
+            <TransitionButton to={AppRoute.Main} text={'Вернуться на главную'} className={'back-to-main'}/>
             <div className='game-content'>
                 <h1>{getGameHeader(gameStatus, currentPlayer)}</h1>
                 <Board board={board}

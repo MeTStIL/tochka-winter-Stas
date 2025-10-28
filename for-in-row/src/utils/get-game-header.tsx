@@ -15,7 +15,7 @@ export function getGameHeader(gameStatus: GameStatusType, currentPlayer: Player)
                 <span className={`game-header in-progress ${currentPlayer}`}>
                     Сейчас ходит:
                     <strong>
-                        {currentPlayer === 'player_1' ? ' Игрок 1 🔴' : ' Игрок 2🟡'}
+                        {currentPlayer === 'player_1' ? ' Игрок 1 🔴' : ' Игрок 2 🟡'}
                     </strong>
                 </span>
             );

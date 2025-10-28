@@ -1,0 +1,24 @@
+﻿.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.welcome-screen h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.welcome-screen small {
+    font-size: 1rem;
+    color: #7a7a7a;
+    margin-bottom: 2rem;
+}
+
+

@@ -3,7 +3,9 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute} from "./constants.ts";
 import ReactVite from "./pages/ReactVite.tsx";
-import Game from "./pages/game.tsx";
+import Game from "./pages/game/game.tsx";
+import Welcome from "./pages/welcome/welcome.tsx";
+import NotFound from "./pages/not-found/not-found.tsx";
 
 function App() {
 
@@ -15,7 +17,7 @@ function App() {
 
                         <Route
                             path={AppRoute.Main}
-                            element={<ReactVite/>}
+                            element={<Welcome/>}
                         />
 
                         <Route
@@ -26,6 +28,11 @@ function App() {
                         <Route
                             path={AppRoute.Secret}
                             element={<ReactVite/>}
+                        />
+
+                        <Route
+                            path={'*'}
+                            element={<NotFound/>}
                         />
 
                     </Routes>

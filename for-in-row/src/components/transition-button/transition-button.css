@@ -1,0 +1,26 @@
+﻿
+.transition-btn {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #ff3c3c, #ff7b00);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 60, 60, 0.4);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.transition-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 123, 0, 0.6);
+    color: #fff;
+}
+
+.transition-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(255, 123, 0, 0.4);
+}

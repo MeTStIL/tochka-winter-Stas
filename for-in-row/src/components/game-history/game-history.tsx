@@ -27,7 +27,7 @@ function GameHistory({history}: GameHistoryProps) {
                                     ? 'Ничья'
                                     : game.winner === 'player_1'
                                         ? 'Игрок 1 🔴'
-                                        : 'Игрок 2🟡'
+                                        : 'Игрок 2 🟡'
 
                             }
                         </td>
