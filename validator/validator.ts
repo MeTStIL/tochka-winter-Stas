@@ -80,4 +80,5 @@ function validator(moves: number[]): validatorResult {
     return result;
 }
 
-console.dir(validator([0, 1, 1, 2, 4, 2, 2, 3, 4, 3, 5, 3, 3]), {depth: null})
+//console.dir(validator([0, 1, 1, 2, 4, 2, 2, 3, 4, 3, 5, 3, 3]), {depth: null})
+console.dir(validator([0, 0, 1, 1, 2, 2, 3, 3, 3]), {depth: null})
