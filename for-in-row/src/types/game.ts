@@ -10,4 +10,3 @@ export type GameResult = {
     id: number,
     winner: Player | 'draw',
 }
-

@@ -1,4 +1,19 @@
-﻿
+﻿.game-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    min-height: 2.5em;
+    text-align: center;
+}
+
+.game-header strong {
+    display: inline-block;
+    width: 300px;
+    text-align: center;
+}
+
+
 .game-header small {
     display: block;
     font-size: 30px;

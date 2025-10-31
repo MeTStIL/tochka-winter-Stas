@@ -1,8 +1,10 @@
-﻿import {GameStatus, type GameStatusType} from "../constants.ts";
+﻿import {type GameModeType, GameStatus, type GameStatusType} from "../constants.ts";
 import type {Player} from "../types/game.ts";
+import getPlayerName from "./get-player-name.ts";
 
 
-export function getGameHeader(gameStatus: GameStatusType, currentPlayer: Player) {
+export function getGameHeader(gameStatus: GameStatusType, currentPlayer: Player, gameMode: GameModeType) {
+
     switch (gameStatus) {
         case GameStatus.Draw:
             return (
@@ -13,18 +15,18 @@ export function getGameHeader(gameStatus: GameStatusType, currentPlayer: Player)
         case GameStatus.InProgress:
             return (
                 <span className={`game-header in-progress ${currentPlayer}`}>
-                    Сейчас ходит:
+                    Сейчас ходит:&nbsp;
                     <strong>
-                        {currentPlayer === 'player_1' ? ' Игрок 1 🔴' : ' Игрок 2 🟡'}
+                        {getPlayerName(currentPlayer, gameMode)}
                     </strong>
                 </span>
             );
         case GameStatus.SomebodyWins:
             return (
                 <span className={`game-header somebody-win ${currentPlayer}`}>
-                    Победу одержал:
+                    Победу одержал:&nbsp;
                     <strong>
-                        {currentPlayer === 'player_1' ? ' Игрок 1 🔴' : ' Игрок 2🟡'}
+                        {getPlayerName(currentPlayer, gameMode)}
                     </strong>
                 </span>
             );

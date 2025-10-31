@@ -31,3 +31,12 @@ export const GameStatus = {
 export type GameStatusType = typeof GameStatus[keyof typeof GameStatus];
 
 export const LOCAL_STORAGE_KEY = 'for-in-row-state';
+export const LOCAL_STORAGE_KEY_GAME_MODE = 'for-in-row-state-game-mode';
+export const ALL_LOCAL_STORAGE_KEYS = [LOCAL_STORAGE_KEY_GAME_MODE, LOCAL_STORAGE_KEY];
+
+export const GameMode = {
+    HotChair:  'hotChair',
+    Bot: 'bot',
+} as const;
+
+export type GameModeType = typeof GameMode[keyof typeof GameMode];

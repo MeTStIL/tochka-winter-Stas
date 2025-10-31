@@ -21,4 +21,14 @@
     margin-bottom: 2rem;
 }
 
+.start-game-btn {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.start-game-btn a {
+    width: 200px;
+    height: 35px;
+}
 

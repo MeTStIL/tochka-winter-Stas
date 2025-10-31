@@ -1,11 +1,14 @@
 ﻿import type {GameResult} from "../../types/game.ts";
 import './game-history.css'
+import type {GameModeType} from "../../constants.ts";
+import getPlayerName from "../../utils/get-player-name.ts";
 
 type GameHistoryProps = {
     history: GameResult[];
+    gameMode: GameModeType;
 }
 
-function GameHistory({history}: GameHistoryProps) {
+function GameHistory({history, gameMode}: GameHistoryProps) {
     return (
         <div className='game-history-container'>
             <h3>История партий</h3>
@@ -25,9 +28,7 @@ function GameHistory({history}: GameHistoryProps) {
                             {
                                 game.winner === 'draw'
                                     ? 'Ничья'
-                                    : game.winner === 'player_1'
-                                        ? 'Игрок 1 🔴'
-                                        : 'Игрок 2 🟡'
+                                    : getPlayerName(game.winner, gameMode)
 
                             }
                         </td>

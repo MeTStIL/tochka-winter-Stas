@@ -2,19 +2,21 @@
 import './board.css'
 import Cell from "../cell/cell.tsx";
 import {useState} from "react";
-import {GameStatus, type GameStatusType} from "../../constants.ts";
+import {type GameModeType, type GameStatusType} from "../../constants.ts";
+import playerCanMakeMove from "../../utils/player-can-make-move.ts";
 
 type BoardProps = {
     board: CellStatus[][];
     onColumnClick: (columnNumber: number) => void;
     currentPlayer: Player;
+    gameMode: GameModeType;
     gameStatus: GameStatusType;
     winningCells: [number, number][];
     lastCords: [number, number] | null;
 }
 
 
-function Board({board, onColumnClick, currentPlayer, gameStatus, winningCells, lastCords}: BoardProps) {
+function Board({board, onColumnClick, currentPlayer, gameMode, gameStatus, winningCells, lastCords}: BoardProps) {
     const [hoveredCell, setHoveredCell] = useState<null | number>(null);
 
     const previewRow = hoveredCell !== null
@@ -34,7 +36,7 @@ function Board({board, onColumnClick, currentPlayer, gameStatus, winningCells, l
                             return (
                                 <Cell key={colIdx}
                                       value={cell}
-                                      showPreview={gameStatus === GameStatus.InProgress && hoveredCell === colIdx && previewRow === rowIdx}
+                                      showPreview={playerCanMakeMove(gameMode, currentPlayer, gameStatus) && hoveredCell === colIdx && previewRow === rowIdx}
                                       previewPlayer={currentPlayer}
                                       onClick={() => onColumnClick(colIdx)}
                                       onMouseEnter={() => setHoveredCell(colIdx)}

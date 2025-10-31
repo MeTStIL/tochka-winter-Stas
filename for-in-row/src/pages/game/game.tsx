@@ -1,5 +1,12 @@
 ﻿import type {BoardType, GameResult, Player} from '../../types/game.ts';
-import {AppRoute, BoardSize, GameStatus, type GameStatusType, LOCAL_STORAGE_KEY} from '../../constants.ts';
+import {
+    AppRoute,
+    BoardSize, GameMode,
+    type GameModeType,
+    GameStatus,
+    type GameStatusType,
+    LOCAL_STORAGE_KEY, LOCAL_STORAGE_KEY_GAME_MODE
+} from '../../constants.ts';
 import {useEffect, useState} from 'react';
 import Board from '../../components/board/board.tsx';
 import {checkWin} from '../../utils/check-win.ts';
@@ -7,41 +14,42 @@ import {getGameHeader} from '../../utils/get-game-header.tsx';
 import './game.css'
 import GameHistory from '../../components/game-history/game-history.tsx';
 import TransitionButton from '../../components/transition-button/transition-button.tsx';
+import makeBotMove from "../../utils/make-bot-move.ts";
+import playerCanMakeMove from "../../utils/player-can-make-move.ts";
 
 
 function Game() {
     const emptyBoard: BoardType = Array.from({length: BoardSize.Rows}, () => Array(BoardSize.Columns).fill(null));
 
+    const stateGameMode = localStorage.getItem(LOCAL_STORAGE_KEY_GAME_MODE);
+    const [gameMode, setGameMode] = useState<GameModeType>(
+        () => stateGameMode ? JSON.parse(stateGameMode).gameMode : GameMode.HotChair
+    );
+
+    const state = localStorage.getItem(LOCAL_STORAGE_KEY);
+
     const [currentPlayer, setCurrentPlayer] = useState<Player>(() => {
-        const state = localStorage.getItem(LOCAL_STORAGE_KEY);
         return state ? JSON.parse(state).currentPlayer : 'player_1';
     });
     const [board, setBoard] = useState<BoardType>(() => {
-        const state = localStorage.getItem(LOCAL_STORAGE_KEY);
         return state ? JSON.parse(state).board : emptyBoard;
     });
     const [winner, setWinner] = useState<null | Player>(() => {
-        const state = localStorage.getItem(LOCAL_STORAGE_KEY);
         return state ? JSON.parse(state).winner : null;
     });
     const [gameStatus, setGameStatus] = useState<GameStatusType>(() => {
-        const state = localStorage.getItem(LOCAL_STORAGE_KEY);
         return state ? JSON.parse(state).gameStatus : GameStatus.InProgress;
     });
     const [winningCells, setWinningCells] = useState<[number, number][]>(() => {
-        const state = localStorage.getItem(LOCAL_STORAGE_KEY);
         return state ? JSON.parse(state).winningCells : [];
     });
     const [gameHistory, setGameHistory] = useState<GameResult[]>(() => {
-        const state = localStorage.getItem(LOCAL_STORAGE_KEY);
         return state ? JSON.parse(state).gameHistory : [];
     })
     const [gameId, setGameId] = useState(() => {
-        const state = localStorage.getItem(LOCAL_STORAGE_KEY);
         return state ? JSON.parse(state).gameId : 1;
     });
     const [lastCords, setLastCords] = useState<[number, number] | null>(() => {
-        const state = localStorage.getItem(LOCAL_STORAGE_KEY);
         return state ? JSON.parse(state).lastCords : null;
     })
     const [highlightRestart, setHighlightRestart] = useState(false);
@@ -58,13 +66,35 @@ function Game() {
             lastCords,
         };
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
-    }, [currentPlayer, board, winner, gameStatus, winningCells, gameHistory, gameId, lastCords]);
+        localStorage.setItem(LOCAL_STORAGE_KEY_GAME_MODE, JSON.stringify(({gameMode})));
+    }, [gameMode, currentPlayer, board, winner, gameStatus, winningCells, gameHistory, gameId, lastCords]);
 
     useEffect(() => {
         if (gameStatus !== GameStatus.InProgress) {
             handleEndGame();
         }
     }, [gameStatus]);
+
+    useEffect(() => {
+        if (gameMode !== GameMode.Bot || currentPlayer !== 'player_2') {
+            return;
+        }
+
+        if (gameStatus !== GameStatus.InProgress || winner) {
+            return;
+        }
+
+        const botChoose = makeBotMove(board);
+        if (botChoose === undefined) {
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            handleColumnClick(botChoose);
+        }, 800);
+
+        return () => clearTimeout(timer);
+    }, [currentPlayer, gameStatus]);
 
 
     const handleColumnClick = (column: number) => {
@@ -130,6 +160,7 @@ function Game() {
         setGameStatus(GameStatus.InProgress);
         setWinningCells([]);
         setLastCords(null);
+        setGameMode(gameMode);
     }
 
     const handleResetAll = () => {
@@ -144,14 +175,16 @@ function Game() {
         setLastCords(null);
     }
 
+
     return (
         <div className='game-layout'>
-            <TransitionButton to={AppRoute.Main} text={'Вернуться на главную'} className={'back-to-main'}/>
+            <TransitionButton to={AppRoute.Main} text={'Вернуться на главную'} className={'back-to-main'} clearStorage/>
             <div className='game-content'>
-                <h1>{getGameHeader(gameStatus, currentPlayer)}</h1>
+                <h1>{getGameHeader(gameStatus, currentPlayer, gameMode)}</h1>
                 <Board board={board}
-                       onColumnClick={gameStatus === GameStatus.InProgress ? handleColumnClick : handleEndGame}
+                       onColumnClick={playerCanMakeMove(gameMode, currentPlayer, gameStatus) ? handleColumnClick : handleEndGame}
                        currentPlayer={currentPlayer}
+                       gameMode={gameMode}
                        gameStatus={gameStatus}
                        winningCells={winningCells}
                        lastCords={lastCords}
@@ -166,10 +199,7 @@ function Game() {
                         Начать играть сначала
                     </button>
                 </div>
-
-
             </div>
-
             <GameHistory history={gameHistory}/>
         </div>
     );
