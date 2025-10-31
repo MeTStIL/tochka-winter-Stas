@@ -29,3 +29,5 @@ export const GameStatus = {
 } as const;
 
 export type GameStatusType = typeof GameStatus[keyof typeof GameStatus];
+
+export const LOCAL_STORAGE_KEY = 'for-in-row-state';

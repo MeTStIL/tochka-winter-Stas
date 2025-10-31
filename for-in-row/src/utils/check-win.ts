@@ -17,7 +17,7 @@ export function checkWin(board: BoardType, currentPlayer: Player) {
             }
 
             for (const [dr, dc] of directions) {
-                const winPositions = [[row, column]];
+                const winPositions: [number, number][] = [[row, column]];
 
                 for (let i = 1; i < 4; i++) {
                     const [r, c] = [row + dr * i, column + dc * i];

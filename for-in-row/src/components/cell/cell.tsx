@@ -11,10 +11,11 @@ type CellProps = {
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
     isWinningCell?: boolean;
+    isLatest: boolean;
 };
 
 
-function Cell({value, showPreview = false, previewPlayer, onClick, onMouseEnter, onMouseLeave, isWinningCell}: CellProps) {
+function Cell({value, showPreview = false, previewPlayer, onClick, onMouseEnter, onMouseLeave, isWinningCell, isLatest}: CellProps) {
     const getColor = () => {
         switch (value) {
             case 'player_1':
@@ -51,7 +52,9 @@ function Cell({value, showPreview = false, previewPlayer, onClick, onMouseEnter,
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             style={style}
-        />
+        >
+            {isLatest && <div className="cell-dot" />}
+        </div>
     )
 
 }
