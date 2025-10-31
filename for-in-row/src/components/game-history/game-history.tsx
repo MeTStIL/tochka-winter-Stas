@@ -1,7 +1,6 @@
-﻿import type {GameResult} from "../../types/game.ts";
+﻿import type {GameModeType, GameResult} from "../../types/game.ts";
 import './game-history.css'
-import type {GameModeType} from "../../constants.ts";
-import getPlayerName from "../../utils/get-player-name.ts";
+import getPlayerName from "../../utils/ui/get-player-name.ts";
 
 type GameHistoryProps = {
     history: GameResult[];

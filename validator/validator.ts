@@ -1,6 +1,6 @@
 ﻿import {BoardType, Player} from "../for-in-row/src/types/game";
 import {BoardSize, GameStatus} from "../for-in-row/src/constants";
-import {checkWin} from "../for-in-row/src/utils/check-win";
+import {checkWin} from "../for-in-row/src/utils/game/check-win";
 
 type validatorBoardState = 'waiting' | 'pending' | 'win' | 'draw';
 

@@ -1,5 +1,5 @@
-﻿import type {BoardType} from "../types/game.ts";
-import {BoardSize} from "../constants.ts";
+﻿import type {BoardType} from "../../types/game.ts";
+import {BoardSize} from "../../constants.ts";
 
 function makeBotMove(board: BoardType) {
     const available = [];

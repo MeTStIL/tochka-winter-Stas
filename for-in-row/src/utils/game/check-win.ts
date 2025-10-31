@@ -1,5 +1,5 @@
-﻿import type {BoardType, Player} from "../types/game.ts";
-import {BoardSize, GameStatus} from "../constants.ts";
+﻿import type {BoardType, Player} from "../../types/game.ts";
+import {BoardSize, GameStatus} from "../../constants.ts";
 
 const directions = [
     [0, 1],

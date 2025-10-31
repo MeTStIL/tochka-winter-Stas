@@ -1,5 +1,5 @@
-﻿import {GameMode, type GameModeType, GameStatus, type GameStatusType} from "../constants.ts";
-import type {Player} from "../types/game.ts";
+﻿import {GameMode, GameStatus} from "../../constants.ts";
+import type {GameModeType, GameStatusType, Player} from "../../types/game.ts";
 
 
 function playerCanMakeMove(gameMode: GameModeType, currentPlayer: Player, gameStatus: GameStatusType) {

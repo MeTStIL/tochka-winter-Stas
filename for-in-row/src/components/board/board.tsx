@@ -1,9 +1,8 @@
-﻿import type {CellStatus, Player} from "../../types/game.ts";
+﻿import type {CellStatus, GameModeType, GameStatusType, Player} from "../../types/game.ts";
 import './board.css'
 import Cell from "../cell/cell.tsx";
 import {useState} from "react";
-import {type GameModeType, type GameStatusType} from "../../constants.ts";
-import playerCanMakeMove from "../../utils/player-can-make-move.ts";
+import playerCanMakeMove from "../../utils/game/player-can-make-move.ts";
 
 type BoardProps = {
     board: CellStatus[][];
@@ -34,7 +33,7 @@ function Board({board, onColumnClick, currentPlayer, gameMode, gameStatus, winni
                             const isLatest = lastCords ? lastCords[0] === rowIdx && lastCords[1] === colIdx : false;
 
                             return (
-                                <Cell key={colIdx}
+                                <Cell key={`${rowIdx}_${colIdx}`}
                                       value={cell}
                                       showPreview={playerCanMakeMove(gameMode, currentPlayer, gameStatus) && hoveredCell === colIdx && previewRow === rowIdx}
                                       previewPlayer={currentPlayer}

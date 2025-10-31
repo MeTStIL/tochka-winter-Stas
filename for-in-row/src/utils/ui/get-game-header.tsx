@@ -1,9 +1,11 @@
-﻿import {type GameModeType, GameStatus, type GameStatusType} from "../constants.ts";
-import type {Player} from "../types/game.ts";
+﻿import { GameStatus} from "../../constants.ts";
+import type {GameModeType, GameStatusType, Player} from "../../types/game.ts";
 import getPlayerName from "./get-player-name.ts";
 
 
 export function getGameHeader(gameStatus: GameStatusType, currentPlayer: Player, gameMode: GameModeType) {
+
+
 
     switch (gameStatus) {
         case GameStatus.Draw:

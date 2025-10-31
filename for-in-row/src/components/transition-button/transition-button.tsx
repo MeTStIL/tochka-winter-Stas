@@ -9,18 +9,19 @@ type TransitionButtonPops = {
     className?: string;
     toSetItems?: {[key: string] : unknown};
     clearStorage?: boolean;
-    storageKey?: string;
 }
 
-function TransitionButton({to, text, className = '', toSetItems, clearStorage = false, storageKey}: TransitionButtonPops) {
+function TransitionButton({to, text, className = '', toSetItems, clearStorage = false}: TransitionButtonPops) {
     const handleClick = () => {
         if (clearStorage) {
             for (const key of ALL_LOCAL_STORAGE_KEYS) {
                 localStorage.removeItem(key);
             }
         }
-        if (toSetItems && storageKey) {
-            localStorage.setItem(storageKey, JSON.stringify(toSetItems));
+        if (toSetItems) {
+            for (const [key, value] of Object.entries(toSetItems)) {
+                localStorage.setItem(key, JSON.stringify(value));
+            }
         }
     }
 
